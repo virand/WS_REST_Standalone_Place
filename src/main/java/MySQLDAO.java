@@ -9,7 +9,11 @@ import java.util.List;
 public class MySQLDAO {
     public List<Place> getPlaces(String word)
     {
-        String query= String.format("SELECT * FROM places WHERE name='%s' OR description='%s' OR city='%s' OR address='%s'", word, word, word, word);
+        String query;
+        if (word==null || word=="")
+            query= String.format("SELECT * FROM places");
+        else
+            query= String.format("SELECT * FROM places WHERE name='%s' OR description='%s' OR city='%s' OR address='%s'", word, word, word, word);
         System.out.println(query);
         List<Place> places = new ArrayList<>();
         ResultSet rs = DataBase.runQuery(query);
